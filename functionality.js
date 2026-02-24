@@ -110,3 +110,34 @@ function updateButtons(card, status) {
   }
 }
 
+// Handle Interview button click
+
+function handleInterview(id) {
+  const card = document.querySelector('.job-card[data-id="' + id + '"]');
+  if (!card) return;
+
+  const currentStatus = card.getAttribute("data-status");
+  const newStatus = currentStatus === "interview" ? "not-applied" : "interview";
+
+  card.setAttribute("data-status", newStatus);
+  updateBadge(card, newStatus);
+  updateButtons(card, newStatus);
+  filterCards();
+}
+
+
+// Handle Rejected button click
+
+function handleRejected(id) {
+  const card = document.querySelector('.job-card[data-id="' + id + '"]');
+  if (!card) return;
+
+  const currentStatus = card.getAttribute("data-status");
+  const newStatus = currentStatus === "rejected" ? "not-applied" : "rejected";
+
+  card.setAttribute("data-status", newStatus);
+  updateBadge(card, newStatus);
+  updateButtons(card, newStatus);
+  filterCards();
+}
+
