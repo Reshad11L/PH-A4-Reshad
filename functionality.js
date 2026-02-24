@@ -151,3 +151,27 @@ function handleDelete(id) {
   filterCards();
 }
 
+// Update Dashboard counts
+
+function updateDashboard() {
+  const allCards = getAllCards();
+
+  const total         = allCards.length;
+  let interviewCount  = 0;
+  let rejectedCount   = 0;
+
+  allCards.forEach(function(card) {
+    const status = card.getAttribute("data-status");
+    if (status === "interview") interviewCount++;
+    if (status === "rejected")  rejectedCount++;
+  });
+
+  document.getElementById("total-count").textContent     = total;
+  document.getElementById("interview-count").textContent = interviewCount;
+  document.getElementById("rejected-count").textContent  = rejectedCount;
+}
+
+// Initial run on page load
+
+filterCards();
+
