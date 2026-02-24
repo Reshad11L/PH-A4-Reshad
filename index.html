@@ -23,6 +23,43 @@
             color: white;
             border-color: #2563eb;
         }
+
+        .status-badge {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 3px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .job-card {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* button activity states */
+
+        .btn-interview.selected {
+            background-color: #22c55e;
+            color: white;
+        }
+
+        .btn-rejected.selected {
+            background-color: #f87171;
+            color: white;
+        }
     </style>
 </head>
 
@@ -52,7 +89,272 @@
             </div>
         </div>
 
-        <hr class="border-slate-200 mb-8"/>
+        <hr class="border-slate-200 mb-8" />
+
+        <!-- Available Jobs Header + Tabs -->
+        <div class="mb-4">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-lg font-bold text-slate-800">Available Jobs</h2>
+                <span id="jobs-count-label" class="text-sm text-slate-500">8 jobs</span>
+            </div>
+            <div class="flex gap-2">
+                <button
+                    class="tab-btn active text-sm font-medium border border-slate-200 bg-white px-4 py-1.5 rounded-full cursor-pointer hover:scale-105 transition-transform duration-150"
+                    data-tab="all" onclick="switchTab('all')">All</button>
+                <button
+                    class="tab-btn text-sm font-medium border border-slate-200 bg-white text-slate-600 px-4 py-1.5 rounded-full cursor-pointer hover:scale-105 transition-transform duration-150"
+                    data-tab="interview" onclick="switchTab('interview')">Interview</button>
+                <button
+                    class="tab-btn text-sm font-medium border border-slate-200 bg-white text-slate-600 px-4 py-1.5 rounded-full cursor-pointer hover:scale-105 transition-transform duration-150"
+                    data-tab="rejected" onclick="switchTab('rejected')">Rejected</button>
+            </div>
+        </div>
+
+        <!-- job cards -->
+
+        <div id="jobs-container" class="flex flex-col gap-3">
+
+            <!-- Card 1 -->
+            <div class="job-card bg-white rounded-2xl shadow-sm border border-slate-100 px-5 py-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                data-id="1" data-status="not-applied">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-slate-800 text-base leading-snug">Mobile First Corp</h3>
+                        <p class="text-slate-500 text-sm mb-2">React Native Developer</p>
+                        <p class="text-slate-400 text-xs mb-3">
+                            <span>Remote</span><span class="mx-1">•</span><span>Full-time</span><span
+                                class="mx-1">•</span><span>$130,000 – $175,000</span>
+                        </p>
+                        <span class="status-badge bg-slate-100 text-slate-500">NOT APPLIED</span>
+                        <p class="text-slate-500 text-sm mt-3 mb-4 leading-relaxed">Build cross-platform mobile
+                            applications using React Native. Work on products used by millions of users worldwide.</p>
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-interview border border-green-500 text-green-600 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-green-50"
+                                onclick="handleInterview(1)">INTERVIEW</button>
+                            <button
+                                class="btn-rejected border border-red-400 text-red-500 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-red-50"
+                                onclick="handleRejected(1)">REJECTED</button>
+                        </div>
+                    </div>
+                    <button class="text-slate-300 hover:text-red-400 transition-colors mt-1 shrink-0 cursor-pointer"
+                        onclick="handleDelete(1)" title="Delete">
+                        <i class="fa-regular fa-trash-can text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="job-card bg-white rounded-2xl shadow-sm border border-slate-100 px-5 py-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                data-id="2" data-status="not-applied">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-slate-800 text-base leading-snug">WebFlow Agency</h3>
+                        <p class="text-slate-500 text-sm mb-2">Web Designer & Developer</p>
+                        <p class="text-slate-400 text-xs mb-3">
+                            <span>Los Angeles, CA</span><span class="mx-1">•</span><span>Part-time</span><span
+                                class="mx-1">•</span><span>$80,000 – $120,000</span>
+                        </p>
+                        <span class="status-badge bg-slate-100 text-slate-500">NOT APPLIED</span>
+                        <p class="text-slate-500 text-sm mt-3 mb-4 leading-relaxed">Create stunning web experiences for
+                            high-profile clients. Must have portfolio and experience with modern web design trends.</p>
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-interview border border-green-500 text-green-600 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-green-50"
+                                onclick="handleInterview(2)">INTERVIEW</button>
+                            <button
+                                class="btn-rejected border border-red-400 text-red-500 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-red-50"
+                                onclick="handleRejected(2)">REJECTED</button>
+                        </div>
+                    </div>
+                    <button class="text-slate-300 hover:text-red-400 transition-colors mt-1 shrink-0 cursor-pointer"
+                        onclick="handleDelete(2)" title="Delete">
+                        <i class="fa-regular fa-trash-can text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="job-card bg-white rounded-2xl shadow-sm border border-slate-100 px-5 py-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                data-id="3" data-status="not-applied">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-slate-800 text-base leading-snug">DataViz Solutions</h3>
+                        <p class="text-slate-500 text-sm mb-2">Data Visualization Specialist</p>
+                        <p class="text-slate-400 text-xs mb-3">
+                            <span>New York, NY</span><span class="mx-1">•</span><span>Full-time</span><span
+                                class="mx-1">•</span><span>$110,000 – $145,000</span>
+                        </p>
+                        <span class="status-badge bg-slate-100 text-slate-500">NOT APPLIED</span>
+                        <p class="text-slate-500 text-sm mt-3 mb-4 leading-relaxed">Transform complex datasets into
+                            clear, compelling visual stories using D3.js and Tableau for Fortune 500 clients.</p>
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-interview border border-green-500 text-green-600 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-green-50"
+                                onclick="handleInterview(3)">INTERVIEW</button>
+                            <button
+                                class="btn-rejected border border-red-400 text-red-500 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-red-50"
+                                onclick="handleRejected(3)">REJECTED</button>
+                        </div>
+                    </div>
+                    <button class="text-slate-300 hover:text-red-400 transition-colors mt-1 shrink-0 cursor-pointer"
+                        onclick="handleDelete(3)" title="Delete">
+                        <i class="fa-regular fa-trash-can text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="job-card bg-white rounded-2xl shadow-sm border border-slate-100 px-5 py-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                data-id="4" data-status="not-applied">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-slate-800 text-base leading-snug">CloudStack Inc</h3>
+                        <p class="text-slate-500 text-sm mb-2">Frontend Engineer</p>
+                        <p class="text-slate-400 text-xs mb-3">
+                            <span>Austin, TX</span><span class="mx-1">•</span><span>Full-time</span><span
+                                class="mx-1">•</span><span>$115,000 – $155,000</span>
+                        </p>
+                        <span class="status-badge bg-slate-100 text-slate-500">NOT APPLIED</span>
+                        <p class="text-slate-500 text-sm mt-3 mb-4 leading-relaxed">Develop scalable frontend systems
+                            for our cloud infrastructure dashboard. Collaborate with backend engineers daily.</p>
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-interview border border-green-500 text-green-600 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-green-50"
+                                onclick="handleInterview(4)">INTERVIEW</button>
+                            <button
+                                class="btn-rejected border border-red-400 text-red-500 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-red-50"
+                                onclick="handleRejected(4)">REJECTED</button>
+                        </div>
+                    </div>
+                    <button class="text-slate-300 hover:text-red-400 transition-colors mt-1 shrink-0 cursor-pointer"
+                        onclick="handleDelete(4)" title="Delete">
+                        <i class="fa-regular fa-trash-can text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="job-card bg-white rounded-2xl shadow-sm border border-slate-100 px-5 py-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                data-id="5" data-status="not-applied">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-slate-800 text-base leading-snug">GreenTech Startup</h3>
+                        <p class="text-slate-500 text-sm mb-2">UI/UX Designer</p>
+                        <p class="text-slate-400 text-xs mb-3">
+                            <span>Remote</span><span class="mx-1">•</span><span>Contract</span><span
+                                class="mx-1">•</span><span>$70,000 – $95,000</span>
+                        </p>
+                        <span class="status-badge bg-slate-100 text-slate-500">NOT APPLIED</span>
+                        <p class="text-slate-500 text-sm mt-3 mb-4 leading-relaxed">Design intuitive interfaces for our
+                            sustainability tracking platform used by environmental organizations globally.</p>
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-interview border border-green-500 text-green-600 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-green-50"
+                                onclick="handleInterview(5)">INTERVIEW</button>
+                            <button
+                                class="btn-rejected border border-red-400 text-red-500 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-red-50"
+                                onclick="handleRejected(5)">REJECTED</button>
+                        </div>
+                    </div>
+                    <button class="text-slate-300 hover:text-red-400 transition-colors mt-1 shrink-0 cursor-pointer"
+                        onclick="handleDelete(5)" title="Delete">
+                        <i class="fa-regular fa-trash-can text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="job-card bg-white rounded-2xl shadow-sm border border-slate-100 px-5 py-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                data-id="6" data-status="not-applied">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-slate-800 text-base leading-snug">FinEdge Systems</h3>
+                        <p class="text-slate-500 text-sm mb-2">JavaScript Developer</p>
+                        <p class="text-slate-400 text-xs mb-3">
+                            <span>Chicago, IL</span><span class="mx-1">•</span><span>Full-time</span><span
+                                class="mx-1">•</span><span>$120,000 – $160,000</span>
+                        </p>
+                        <span class="status-badge bg-slate-100 text-slate-500">NOT APPLIED</span>
+                        <p class="text-slate-500 text-sm mt-3 mb-4 leading-relaxed">Build real-time financial dashboards
+                            and trading tools. Experience with WebSockets and high-performance rendering required.</p>
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-interview border border-green-500 text-green-600 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-green-50"
+                                onclick="handleInterview(6)">INTERVIEW</button>
+                            <button
+                                class="btn-rejected border border-red-400 text-red-500 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-red-50"
+                                onclick="handleRejected(6)">REJECTED</button>
+                        </div>
+                    </div>
+                    <button class="text-slate-300 hover:text-red-400 transition-colors mt-1 shrink-0 cursor-pointer"
+                        onclick="handleDelete(6)" title="Delete">
+                        <i class="fa-regular fa-trash-can text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="job-card bg-white rounded-2xl shadow-sm border border-slate-100 px-5 py-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                data-id="7" data-status="not-applied">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-slate-800 text-base leading-snug">EduPlatform Co</h3>
+                        <p class="text-slate-500 text-sm mb-2">Full Stack Developer</p>
+                        <p class="text-slate-400 text-xs mb-3">
+                            <span>Boston, MA</span><span class="mx-1">•</span><span>Full-time</span><span
+                                class="mx-1">•</span><span>$105,000 – $140,000</span>
+                        </p>
+                        <span class="status-badge bg-slate-100 text-slate-500">NOT APPLIED</span>
+                        <p class="text-slate-500 text-sm mt-3 mb-4 leading-relaxed">Develop and maintain our online
+                            learning management system serving over 200,000 students across 40+ countries.</p>
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-interview border border-green-500 text-green-600 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-green-50"
+                                onclick="handleInterview(7)">INTERVIEW</button>
+                            <button
+                                class="btn-rejected border border-red-400 text-red-500 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-red-50"
+                                onclick="handleRejected(7)">REJECTED</button>
+                        </div>
+                    </div>
+                    <button class="text-slate-300 hover:text-red-400 transition-colors mt-1 shrink-0 cursor-pointer"
+                        onclick="handleDelete(7)" title="Delete">
+                        <i class="fa-regular fa-trash-can text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="job-card bg-white rounded-2xl shadow-sm border border-slate-100 px-5 py-4 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
+                data-id="8" data-status="not-applied">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-slate-800 text-base leading-snug">HealthAI Labs</h3>
+                        <p class="text-slate-500 text-sm mb-2">Software Engineer</p>
+                        <p class="text-slate-400 text-xs mb-3">
+                            <span>San Francisco, CA</span><span class="mx-1">•</span><span>Full-time</span><span
+                                class="mx-1">•</span><span>$140,000 – $185,000</span>
+                        </p>
+                        <span class="status-badge bg-slate-100 text-slate-500">NOT APPLIED</span>
+                        <p class="text-slate-500 text-sm mt-3 mb-4 leading-relaxed">Build AI-powered health monitoring
+                            applications. Work closely with medical professionals to improve patient outcomes.</p>
+                        <div class="flex gap-2">
+                            <button
+                                class="btn-interview border border-green-500 text-green-600 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-green-50"
+                                onclick="handleInterview(8)">INTERVIEW</button>
+                            <button
+                                class="btn-rejected border border-red-400 text-red-500 text-xs font-bold px-3 py-1.5 rounded cursor-pointer transition-transform duration-150 hover:scale-105 hover:bg-red-50"
+                                onclick="handleRejected(8)">REJECTED</button>
+                        </div>
+                    </div>
+                    <button class="text-slate-300 hover:text-red-400 transition-colors mt-1 shrink-0 cursor-pointer"
+                        onclick="handleDelete(8)" title="Delete">
+                        <i class="fa-regular fa-trash-can text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
 
 </body>
 
