@@ -156,7 +156,7 @@ function handleDelete(id) {
 function updateDashboard() {
   const allCards = getAllCards();
 
-  const total         = allCards.length;
+  const total = allCards.length;
   let interviewCount  = 0;
   let rejectedCount   = 0;
 
@@ -166,7 +166,7 @@ function updateDashboard() {
     if (status === "rejected")  rejectedCount++;
   });
 
-  document.getElementById("total-count").textContent     = total;
+  document.getElementById("total-count").textContent = total;
   document.getElementById("interview-count").textContent = interviewCount;
   document.getElementById("rejected-count").textContent  = rejectedCount;
 }
