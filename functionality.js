@@ -141,3 +141,13 @@ function handleRejected(id) {
   filterCards();
 }
 
+// Handle Delete button click
+
+function handleDelete(id) {
+  const card = document.querySelector('.job-card[data-id="' + id + '"]');
+  if (!card) return;
+
+  card.remove();
+  filterCards();
+}
+
